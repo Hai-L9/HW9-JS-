@@ -23,7 +23,9 @@ public class DriverReservation
 		String answer = sc.nextLine();
 		
 		if (answer.toLowerCase().contains("make")) {
-			
+			//TODO
+		
+		
 		} else if (answer.toLowerCase().contains("check") || answer.toLowerCase().contains("avalibility")) {
 			System.out.println("Please enter day (dd)");
 			String day = sc.next();
@@ -44,13 +46,16 @@ public class DriverReservation
 					System.out.println("Please type time in (##:##) format");
 				}
 			}
+			
 			if (time.charAt(1) == ':')
 				time = "0" + time;
 			answer = ("2021-11-" + day + "T" + time + ":00");
 			date = LocalDateTime.parse(answer);
 			System.out.println(res.checkDate(date));
+		
+		
 		} else if (answer.toLowerCase().contains("cancel")) {
-			
+			//TODO
 		}
 		
 		
