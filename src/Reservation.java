@@ -15,6 +15,9 @@ public class Reservation
 	LocalDateTime date = LocalDateTime.now();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd 'at' hh:mm a");
 	
+	/**
+	 * Main Reservation
+	 **/
 	public Reservation()
 	{
 		name = "TempName";
