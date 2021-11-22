@@ -4,13 +4,16 @@ import java.util.Scanner;
 /* Author: Joshua Stone
  * Date: Nov 19, 2021
  * Class: CSC 160 502
- * Assignment: 
+ * Assignment: HW9
  *
- * Program Description: 
+ * Program Description: Allows user to create check and cancel reservations at restaurant
 */
 
 public class DriverReservation
 {
+	/**
+	 * DriverReservation Main
+	 */
 	public static void main(String[] args)
 	{
 		boolean isDone = false;
@@ -25,7 +28,7 @@ public class DriverReservation
 		System.out.println("Welcome to Le Bernardin, what would you like to do?");
 		
 		while (!isDone) {
-			System.out.printf("[   Make Reservation     ]\n[   Check Avalibility    ]\n[   Cancel Reservation   ]\n");
+			System.out.printf("[   Make Reservation     ]\n[   Check Avalibility    ]\n[   Cancel Reservation   ]\n[   Quit                 ]\n");
 			String answer = sc.nextLine();
 			
 			if (answer.toLowerCase().contains("make")) {
@@ -35,32 +38,35 @@ public class DriverReservation
 				date = userDateTime(); // Collects date info 
 				if (res.checkDate(date) == true) { // Check time slot
 					res.setDateTime(name, date); // Fill time slot
-					System.out.println("Your reservation was successfull, see you at " + date.getHour() + "!\n");
+					System.out.println("Your reservation was successfull, see you at " + date.getHour() + "!");
 				}else
-					System.out.println("There are no avalible tables at this time.\n");
+					System.out.println("This time has already been reserved.");
 				
 				
 			} else if (answer.toLowerCase().contains("check") || answer.toLowerCase().contains("avalibility")) {
 				
 				if (res.checkDate(userDateTime()) == true) // Collects date info and checks time slot
-					System.out.println("There is an avalible table at this time.\n"); 
+					System.out.println("There is an avalible table at this time."); 
 				else
-					System.out.println("There are no avalible tables at this time.\n");
+					System.out.println("This time has already been reserved.");
 				
 				
 			} else if (answer.toLowerCase().contains("cancel")) {
-				boolean isCancelDone = false;
-				while (!isCancelDone) {
 				date = userDateTime();
 				boolean isGoodDate = res.cancel(name, date);
 				if (isGoodDate == true){
-					
-				}
-				
-				}
+					System.out.println("Your reservation has been canceled.");
+				} else
+					System.out.println("You do not have a reservation at the specified date and time.");
+			} else if (answer.toLowerCase().contains("quit")) {
+				isDone = true;
+			} else {
+				System.out.println("Unrecognized request please try again.");
 			}
 		}
-		System.out.println(res.toString());
+		
+		System.out.println(res.toString()); // Only prints most recently created reservation.
+		
 		sc.close();
 	}
 

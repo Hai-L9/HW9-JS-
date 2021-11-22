@@ -1,5 +1,6 @@
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+
 /* Author: Joshua Stone
  * Date: Nov 19, 2021
  * Class: CSC 160 502
@@ -14,6 +15,7 @@ public class Reservation
 	String occasion;
 	LocalDateTime date = LocalDateTime.now();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd 'at' hh:mm a");
+	// 2d String array of dates. TODO replace this with .properties file for persistent data storage
 	String[][] dateTimeArr = {{null, null, "tom"},{"kaile", null, null},{"emily", null, null},{null, "john", null},{"danny", "josh", "alex"},{null, null, null},{null, "cassandra", null},{"taylor", null, null},{null, null, "Krystal"},{null, "hannah", null},{"eduardo", null, null},{null, null, "lilpump"},{null, "omar", null},{"edgar", null, null},{"adam", null, "david"},{null, null, "alan"},{null, "mary", null},{"rebecca", null, null},{null, null, null},{null, "maria", null},{null, null, "jesus"},{null, "grace", null},{null, "skai", null},{"kimberly", null, null},{null, null, "manny"},{"karina", null, null},{null, null, "anna"},{"tyler", null, null},{"macayla", null, null},{null, null, "danny"}};
 	
 	/**
@@ -45,20 +47,19 @@ public class Reservation
 	}
 
 	/**
-	 * TODO Description
+	 * Returns date field as string
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param name String
 	 * @return String
 	 */
-	public String getDateTime(String name)
+	public String getDateTime()
 	{
 		return String.format(date.format(formatter));
 	}
 	
 	/**
-	 * TODO Description
+	 * Sets date field
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
@@ -76,7 +77,7 @@ public class Reservation
 	}
 	
 	/**
-	 * TODO Description
+	 * Sets name field
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
@@ -88,7 +89,7 @@ public class Reservation
 	}
 	
 	/**
-	 * TODO Description
+	 * Replaces name field returns success or fail as boolean
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
@@ -107,11 +108,11 @@ public class Reservation
 	}
 	
 	/**
-	 * TODO Description
+	 * Sets occasion field
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param String occasion
+	 * @param occasion String
 	 * @return void
 	 */
 	public void setOccasion(String occasion) {
@@ -119,7 +120,7 @@ public class Reservation
 	}
 	
 	/**
-	 * TODO Description
+	 * Print object as string
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
@@ -132,11 +133,12 @@ public class Reservation
 	
 	
 	/**
-	 * TODO Description
+	 * Sets object date
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param String name, LocalDateTime date
+	 * @param name String
+	 * @param date LocalDateTime
 	 * @return void
 	 */
 	private void setDate (LocalDateTime date) {
@@ -147,11 +149,11 @@ public class Reservation
 
 
 	/**
-	 * TODO Description
+	 * check slot in date array
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param LocalDateTime date
+	 * @param date LocalDateTime
 	 * @return boolean
 	 */
 	public boolean checkDate(LocalDateTime date)
@@ -162,6 +164,27 @@ public class Reservation
 		if (dateTimeArr[i][j] == null)
 			return true;
 		else
+			return false;
+	}
+
+	/**
+	 * Cancel reservation in date array
+	 * @author Joshua Stone
+	 * @date Nov 21, 2021
+	 * @callingProgram TODO
+	 * @param name String
+	 * @param date LocalDateTime
+	 * @return boolean
+	 */
+	public boolean cancel(String name, LocalDateTime date)
+	{
+		String index = convertDateTime(date);
+		int i = Integer.parseInt(index.substring(0, index.indexOf(',') ) );
+		int j =Integer.parseInt(index.substring(index.indexOf(',') + 1, index.length() ) );
+		if (dateTimeArr[i][j].equals(name)) {
+			dateTimeArr[i][j] = null;
+			return true;
+		} else
 			return false;
 	}
 
