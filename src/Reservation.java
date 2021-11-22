@@ -99,7 +99,7 @@ public class Reservation
 	 * @return boolean
 	 */
 	public boolean setName(String name, String newName) {
-		if (name.equals(this.name) && (date == this.date)) {
+		if (name.equals(this.name)) {
 			this.name = newName;
 			return true;
 		} else {
