@@ -14,6 +14,7 @@ public class Reservation
 	String occasion;
 	LocalDateTime date = LocalDateTime.now();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd 'at' hh:mm a");
+	String[][] dateTimeArr = {{null, null, "tom"},{"kaile", null, null},{"emily", null, null},{null, "john", null},{"danny", "josh", "alex"},{null, null, null},{null, "cassandra", null},{"taylor", null, null},{null, null, "Krystal"},{null, "hannah", null},{"eduardo", null, null},{null, null, "lilpump"},{null, "omar", null},{"edgar", null, null},{"adam", null, "david"},{null, null, "alan"},{null, "mary", null},{"rebecca", null, null},{null, null, null},{null, "maria", null},{null, null, "jesus"},{null, "grace", null},{null, "skai", null},{"kimberly", null, null},{null, null, "manny"},{"karina", null, null},{null, null, "anna"},{"tyler", null, null},{"macayla", null, null},{null, null, "danny"}};
 	
 	/**
 	 * Main Reservation
@@ -25,6 +26,23 @@ public class Reservation
 		date = LocalDateTime.of(2021, Month.NOVEMBER, 1, 0, 0);
 	}
 	
+	private String convertDateTime(LocalDateTime date) {
+		int dayIndex = date.getDayOfMonth() - 1;
+		int time = date.getHour();
+		int timeIndex = -1;
+		if (time == 6)
+			timeIndex = 0;
+		else if (time == 8)
+			timeIndex = 1;
+		else if (time == 10)
+			timeIndex = 2;
+		else {
+			System.out.println("Error in time conversion!! " + time);
+			System.exit(-1);
+		}
+		
+		return dayIndex + "," + timeIndex;
+	}
 
 	/**
 	 * TODO Description
@@ -49,8 +67,12 @@ public class Reservation
 	 * @param time int
 	 * @return void
 	 */
-	public void setDateTime(String name, int date, int time) {
-		//TODO
+	public void setDateTime(String name, LocalDateTime date) {
+		String index = convertDateTime(date);
+		int i = Integer.parseInt(index.substring(0, index.indexOf(',') ) );
+		int j =Integer.parseInt(index.substring(index.indexOf(',') + 1, index.length() ) );
+		dateTimeArr[i][j] = name;
+		setDate(date);
 	}
 	
 	/**
@@ -75,7 +97,7 @@ public class Reservation
 	 * @param date LocalDateTime
 	 * @return boolean
 	 */
-	public boolean setName(String name, String newName, LocalDateTime date) {
+	public boolean setName(String name, String newName) {
 		if (name.equals(this.name) && (date == this.date)) {
 			this.name = newName;
 			return true;
@@ -117,7 +139,7 @@ public class Reservation
 	 * @param String name, LocalDateTime date
 	 * @return void
 	 */
-	private void setDate (String name, LocalDateTime date) {
+	private void setDate (LocalDateTime date) {
 		if (name.equals(this.name)) {
 			this.date = date;
 		}
@@ -134,7 +156,24 @@ public class Reservation
 	 */
 	public boolean checkDate(LocalDateTime date)
 	{
-		return true; //TODO add 2d array of date time slots
+		String index = convertDateTime(date);
+		int i = Integer.parseInt(index.substring(0, index.indexOf(',') ) );
+		int j =Integer.parseInt(index.substring(index.indexOf(',') + 1, index.length() ) );
+		if (dateTimeArr[i][j] == null)
+			return true;
+		else
+			return false;
 	}
 
 }
+
+
+//for (int i = 0; i < dateTimeArr.length; i++)
+//{
+//	for (int j = 0; j < dateTimeArr[i].length; j++)
+//	{
+//		if (name.equals(dateTimeArr[i][j])) {
+//			
+//		}
+//	}
+//}
