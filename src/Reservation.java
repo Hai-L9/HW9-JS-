@@ -31,7 +31,7 @@ public class Reservation
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param String name
+	 * @param name String
 	 * @return String
 	 */
 	public String getDateTime(String name)
@@ -44,7 +44,9 @@ public class Reservation
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param Strin name, int date, int time
+	 * @param name String
+	 * @param date int
+	 * @param time int
 	 * @return void
 	 */
 	public void setDateTime(String name, int date, int time) {
@@ -56,7 +58,7 @@ public class Reservation
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param String name
+	 * @param  name String
 	 * @return void
 	 */
 	public void setName(String name) {
@@ -68,7 +70,9 @@ public class Reservation
 	 * @author Joshua Stone
 	 * @date Nov 19, 2021
 	 * @callingProgram Reservation
-	 * @param String name, String newName, LocalDateTime date
+	 * @param name String
+	 * @param newName String
+	 * @param date LocalDateTime
 	 * @return boolean
 	 */
 	public boolean setName(String name, String newName, LocalDateTime date) {
